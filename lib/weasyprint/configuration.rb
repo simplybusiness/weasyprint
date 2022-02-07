@@ -7,8 +7,7 @@ class WeasyPrint
       @verbose         = false
       @meta_tag_prefix = 'weasyprint-'
       @default_options = {
-        encoding: 'UTF-8',
-        format: 'pdf'
+        encoding: 'UTF-8'
       }
     end
 
