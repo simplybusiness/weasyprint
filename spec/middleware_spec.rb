@@ -227,22 +227,22 @@ describe WeasyPrint::Middleware do
       end
 
       describe "saving generated pdf to disk" do
-	before do
+        before do
           #make sure tests don't find an old test_save.pdf
           File.delete('spec/test_save.pdf') if File.exists?('spec/test_save.pdf')
-          expect(File.exists?('spec/test_save.pdf')).to be_false
-	end
+          expect(File.exists?('spec/test_save.pdf')).to be false
+        end
 
         context "when header WeasyPrint-save-pdf is present" do
           it "should saved the .pdf to disk" do
-	    headers = { 'WeasyPrint-save-pdf' => 'spec/test_save.pdf' }
+	          headers = { 'WeasyPrint-save-pdf' => 'spec/test_save.pdf' }
             mock_app({}, {only: '/public'}, headers)
-	    get 'http://www.example.org/public/test_save.pdf'
-            expect(File.exists?('spec/test_save.pdf')).to be_true
-	  end
+	          get 'http://www.example.org/public/test_save.pdf'
+            expect(File.exists?('spec/test_save.pdf')).to be true
+	        end
 
           it "should not raise when target directory does not exist" do
-	    headers = { 'WeasyPrint-save-pdf' => '/this/dir/does/not/exist/spec/test_save.pdf' }
+	          headers = { 'WeasyPrint-save-pdf' => '/this/dir/does/not/exist/spec/test_save.pdf' }
             mock_app({}, {only: '/public'}, headers)
             expect {
               get 'http://www.example.com/public/test_save.pdf'
@@ -253,8 +253,8 @@ describe WeasyPrint::Middleware do
         context "when header WeasyPrint-save-pdf is not present" do
           it "should not saved the .pdf to disk" do
             mock_app({}, {only: '/public'}, {} )
-	    get 'http://www.example.org/public/test_save.pdf'
-            expect(File.exists?('spec/test_save.pdf')).to be_false
+	          get 'http://www.example.org/public/test_save.pdf'
+            expect(File.exists?('spec/test_save.pdf')).to be false
           end
         end
       end
@@ -366,19 +366,19 @@ describe WeasyPrint::Middleware do
   it "should not get stuck rendering each request as pdf" do
     mock_app
     # false by default. No requests.
-    expect(@app.send(:rendering_pdf?)).to be_false
+    expect(@app.send(:rendering_pdf?)).to be_falsey
 
     # Remain false on a normal request
     get 'http://www.example.org/public/file'
-    expect(@app.send(:rendering_pdf?)).to be_false
+    expect(@app.send(:rendering_pdf?)).to be false
 
     # Return true on a pdf request.
     get 'http://www.example.org/public/file.pdf'
-    expect(@app.send(:rendering_pdf?)).to be_true
+    expect(@app.send(:rendering_pdf?)).to be true
 
     # Restore to false on any non-pdf request.
     get 'http://www.example.org/public/file'
-    expect(@app.send(:rendering_pdf?)).to be_false
+    expect(@app.send(:rendering_pdf?)).to be false
   end
 
 end

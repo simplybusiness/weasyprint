@@ -336,7 +336,7 @@ describe WeasyPrint do
     it "should not allow shell injection in options" do
       weasyprint = WeasyPrint.new('html', :encoding => "a title\"; touch #{@test_path} #")
       weasyprint.to_pdf
-      expect(File.exist?(@test_path)).to be_false
+      expect(File.exist?(@test_path)).to be false
     end
   end
 end

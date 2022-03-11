@@ -1,5 +1,4 @@
 require 'shellwords'
-
 class WeasyPrint
 
   class NoExecutableError < StandardError
@@ -15,6 +14,8 @@ class WeasyPrint
       super("Improper Source: #{msg}")
     end
   end
+
+  class CommandFailedError < StandardError; end
 
   attr_accessor :source, :stylesheets
   attr_reader :options
@@ -68,8 +69,9 @@ class WeasyPrint
     result = File.read(path) if path
 
     # $? is thread safe per http://stackoverflow.com/questions/2164887/thread-safe-external-process-in-ruby-plus-checking-exitstatus
-    raise "command failed (exitstatus=#{$?.exitstatus}): #{invoke}" if result.to_s.strip.empty? or !successful?($?)
-    return result
+    raise CommandFailedError.new("exitstatus=#{$?.exitstatus}): #{invoke}") if result.to_s.strip.empty? or !successful?($?)
+    
+    result
   end
 
   def to_file(path)
