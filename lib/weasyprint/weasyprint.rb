@@ -27,7 +27,7 @@ class WeasyPrint
     @options = WeasyPrint.configuration.default_options.merge(options)
     @options = normalize_options(@options)
 
-    raise NoExecutableError.new unless File.exists?(WeasyPrint.configuration.weasyprint)
+    raise NoExecutableError.new unless File.exist?(WeasyPrint.configuration.weasyprint)
   end
 
   def command(path = nil)

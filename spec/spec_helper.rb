@@ -8,7 +8,7 @@ require 'mocha'
 require 'rack'
 require 'rack/test'
 require 'active_support'
-require 'custom_wkhtmltopdf_path' if File.exists?(File.join(SPEC_ROOT, 'custom_wkhtmltopdf_path.rb'))
+require 'custom_wkhtmltopdf_path' if File.exist?(File.join(SPEC_ROOT, 'custom_wkhtmltopdf_path.rb'))
 
 RSpec.configure do |config|
   include Rack::Test::Methods
