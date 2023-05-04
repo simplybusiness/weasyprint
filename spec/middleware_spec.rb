@@ -229,8 +229,8 @@ describe WeasyPrint::Middleware do
       describe "saving generated pdf to disk" do
 	before do
           #make sure tests don't find an old test_save.pdf
-          File.delete('spec/test_save.pdf') if File.exists?('spec/test_save.pdf')
-          expect(File.exists?('spec/test_save.pdf')).to be_false
+          File.delete('spec/test_save.pdf') if File.exist?('spec/test_save.pdf')
+          expect(File.exist?('spec/test_save.pdf')).to be_false
 	end
 
         context "when header WeasyPrint-save-pdf is present" do
@@ -238,7 +238,7 @@ describe WeasyPrint::Middleware do
 	    headers = { 'WeasyPrint-save-pdf' => 'spec/test_save.pdf' }
             mock_app({}, {only: '/public'}, headers)
 	    get 'http://www.example.org/public/test_save.pdf'
-            expect(File.exists?('spec/test_save.pdf')).to be_true
+            expect(File.exist?('spec/test_save.pdf')).to be_true
 	  end
 
           it "should not raise when target directory does not exist" do
@@ -254,7 +254,7 @@ describe WeasyPrint::Middleware do
           it "should not saved the .pdf to disk" do
             mock_app({}, {only: '/public'}, {} )
 	    get 'http://www.example.org/public/test_save.pdf'
-            expect(File.exists?('spec/test_save.pdf')).to be_false
+            expect(File.exist?('spec/test_save.pdf')).to be_false
           end
         end
       end
@@ -366,19 +366,19 @@ describe WeasyPrint::Middleware do
   it "should not get stuck rendering each request as pdf" do
     mock_app
     # false by default. No requests.
-    expect(@app.send(:rendering_pdf?)).to be_false
+    expect(@app.send(:rendering_pdf?)).to be false
 
     # Remain false on a normal request
     get 'http://www.example.org/public/file'
-    expect(@app.send(:rendering_pdf?)).to be_false
+    expect(@app.send(:rendering_pdf?)).to be false
 
     # Return true on a pdf request.
     get 'http://www.example.org/public/file.pdf'
-    expect(@app.send(:rendering_pdf?)).to be_true
+    expect(@app.send(:rendering_pdf?)).to be true
 
     # Restore to false on any non-pdf request.
     get 'http://www.example.org/public/file'
-    expect(@app.send(:rendering_pdf?)).to be_false
+    expect(@app.send(:rendering_pdf?)).to be false
   end
 
 end
