@@ -366,19 +366,19 @@ describe WeasyPrint::Middleware do
   it "should not get stuck rendering each request as pdf" do
     mock_app
     # false by default. No requests.
-    expect(@app.send(:rendering_pdf?)).to be_false
+    expect(@app.send(:rendering_pdf?)).to be false
 
     # Remain false on a normal request
     get 'http://www.example.org/public/file'
-    expect(@app.send(:rendering_pdf?)).to be_false
+    expect(@app.send(:rendering_pdf?)).to be false
 
     # Return true on a pdf request.
     get 'http://www.example.org/public/file.pdf'
-    expect(@app.send(:rendering_pdf?)).to be_true
+    expect(@app.send(:rendering_pdf?)).to be true
 
     # Restore to false on any non-pdf request.
     get 'http://www.example.org/public/file'
-    expect(@app.send(:rendering_pdf?)).to be_false
+    expect(@app.send(:rendering_pdf?)).to be false
   end
 
 end
