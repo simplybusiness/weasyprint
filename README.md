@@ -1,5 +1,13 @@
 # WeasyPrint
 
+> ## ⚠️ This project is archived and no longer maintained
+>
+> As of August 2026, Simply Business is no longer maintaining this gem. No further
+> updates, bug fixes, or security patches will be released, and issues and pull
+> requests are no longer being monitored.
+
+---
+
 Create PDFs using plain old HTML+CSS. Uses [weasyprint](http://weasyprint.org/) on the back-end which renders HTML.
 
 ## Install
