@@ -9,8 +9,20 @@ Gem::Specification.new do |s|
   s.authors     = ["Jared Pace", "Relevance", "Simply Business"]
   s.email       = ["jared@codewordstudios.com", "lukas.oberhuber@simplybusiness.co.uk"]
   s.homepage    = "https://github.com/simplybusiness/weasyprint"
-  s.summary     = "HTML+CSS -> PDF"
-  s.description = "Uses weasyprint to create PDFs using HTML"
+  s.summary     = "[ARCHIVED] HTML+CSS -> PDF"
+  s.description = "Uses weasyprint to create PDFs using HTML. This gem is archived and no longer maintained as of August 2026."
+
+  s.post_install_message = <<~MSG
+    ******************************************************************
+
+    WeasyPrint (this Ruby gem) is ARCHIVED and no longer maintained.
+
+    As of August 2026, Simply Business is no longer maintaining this
+    gem. No further updates, bug fixes, or security patches will be
+    released.
+
+    ******************************************************************
+  MSG
 
   # s.rubyforge_project = "weasyprint"
 
